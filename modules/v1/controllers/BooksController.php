@@ -2,18 +2,37 @@
 
 namespace app\modules\v1\controllers;
 
-use Yii;
-use yii\rest\Controller;
+use app\modules\v1\models\Book;
+use yii\rest\ActiveController;
 
-class BooksController extends Controller
+class BooksController extends ActiveController
 {
+    public $modelClass = Book::class;
 
-    public function actionIndex()
+    protected function verbs()
     {
-       Yii::$app->response->statusCode = 200;
-       return [
-           'status' => 'ok'
-       ];
+        $verbs = parent::verbs();
+        $verbs =  [
+            'index' => ['GET', 'POST', 'HEAD'],
+            'view' => ['GET', 'HEAD'],
+            'create' => ['POST'],
+            'update' => ['PUT', 'POST', 'PATCH'],
+            'delete' => ['DELETE'],
+        ];
+        return $verbs;
+    }
+    
+    public function actions(){
+        $actions = parent::actions();
+        unset($actions['index']);
+        return $actions;
     }
 
+    public function actionIndex(){
+        return Book::find()->with('author')->asArray()->all();
+    }
+
+    public function actionList(){
+        return Book::find()->with('author')->asArray()->all();
+    }
 }

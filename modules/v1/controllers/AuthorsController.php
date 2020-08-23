@@ -3,7 +3,6 @@
 namespace app\modules\v1\controllers;
 
 use app\modules\v1\models\Author;
-use Yii;
 use yii\rest\ActiveController;
 
 class AuthorsController extends ActiveController
@@ -22,13 +21,4 @@ class AuthorsController extends ActiveController
         ];
         return $verbs;
     }
-
-    // public function actionIndex()
-    // {
-    //    Yii::$app->response->statusCode = 200;
-    //    return [
-    //        'status' => 'ok'
-    //    ];
-    // }
-
 }
