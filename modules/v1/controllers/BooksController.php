@@ -39,10 +39,10 @@ class BooksController extends ActiveController
         $models = Book::find()->with('author')->all();
         foreach ($models as $book) {
             array_push($list, array(
-                'author' => $book->author->firstname .' '. $book->author->lastname,
+                'id' => $book->id,
                 'title' => $book->title,
                 'isbn' => $book->isbn,
-                'id' => $book->id
+                'author' => $book->author->firstname .' '. $book->author->lastname
             ));
         }
         return $list;
