@@ -28,13 +28,13 @@ class BooksController extends ActiveController
 
     public function actionIndex()
     {
-        return Book::find()->with('author')->orderBy(['title' => SORT_DESC])->asArray()->all();
+        return Book::find()->with('author')->orderBy(['title' => SORT_ASC])->asArray()->all();
     }
 
     public function actionList()
     {
         $list = array();
-        $models = Book::find()->with('author')->orderBy(['title' => SORT_DESC])->all();
+        $models = Book::find()->with('author')->orderBy(['title' => SORT_ASC])->all();
         foreach ($models as $book) {
             array_push($list, array(
                 'id' => $book->id,
