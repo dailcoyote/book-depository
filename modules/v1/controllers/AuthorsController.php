@@ -4,22 +4,19 @@ namespace app\modules\v1\controllers;
 
 use app\modules\v1\models\Author;
 use yii\rest\ActiveController;
+use yii\filters\Cors;
 
 class AuthorsController extends ActiveController
 {
     public $modelClass = Author::class;
 
-    protected function verbs()
+    public function behaviors()
     {
-        $verbs = parent::verbs();
-        $verbs =  [
-            'index' => ['GET', 'POST', 'HEAD'],
-            'view' => ['GET', 'HEAD'],
-            'create' => ['POST'],
-            'update' => ['PUT', 'PATCH'],
-            'delete' => ['DELETE'],
+        $behaviors = parent::behaviors();
+        $behaviors['cors'] = [
+            'class' => Cors::class
         ];
-        return $verbs;
+        return $behaviors;
     }
 
     public function actions()
@@ -35,11 +32,11 @@ class AuthorsController extends ActiveController
         $models = Author::find()->with('books')->all();
         foreach ($models as $author) {
             array_push($list, array(
+                'id' => $author->id,
                 'firstname' => $author->firstname,
                 'lastname' => $author->lastname,
                 'occupation' => $author->occupation,
-                'books_count' => intval($author->getBooks()->count()),
-                'id' => $author->id
+                'books_count' => intval($author->getBooks()->count())
             ));
         }
         return $list;

@@ -9,17 +9,13 @@ class BooksController extends ActiveController
 {
     public $modelClass = Book::class;
 
-    protected function verbs()
+    public function behaviors()
     {
-        $verbs = parent::verbs();
-        $verbs =  [
-            'index' => ['GET', 'POST', 'HEAD'],
-            'view' => ['GET', 'HEAD'],
-            'create' => ['POST'],
-            'update' => ['PUT', 'POST', 'PATCH'],
-            'delete' => ['DELETE'],
+        $behaviors = parent::behaviors();
+        $behaviors['cors'] = [
+            'class' => Cors::class
         ];
-        return $verbs;
+        return $behaviors;
     }
 
     public function actions()
