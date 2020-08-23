@@ -45,10 +45,13 @@ $config = [
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+            'showScriptName' => false
         ],
+    ],
+    'modules' => [
+        'v1' => [
+            'class' => app\modules\v1\Module::class
+        ]
     ],
     'params' => $params,
 ];
