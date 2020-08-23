@@ -17,6 +17,11 @@ const routes = [
         component: () => import("../components/AuthorsList")
       },
       {
+        path: 'admin/authors/add',
+        name: 'add-author',
+        component: () => import("../components/AddAuthor")
+      },
+      {
         path: 'admin/books',
         name: 'books',
         component: () => import("../components/BooksList")

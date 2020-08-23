@@ -2,10 +2,16 @@
   <table id="data-list">
     <tr>
       <th v-for="(col, i) in columns" :key="i">{{col}}</th>
+      <th></th>
+      <th></th>
     </tr>
     <tr v-for="(item, i) in data" :key="i">
-      <td v-for="value in item" :key="value.id">
-        {{ value }}
+      <td v-for="(value, k) in item" :key="k">{{ value }}</td>
+      <td>
+        <a href="javascript:void(0)" @click="onEditItem(item)">Редактировать</a>
+      </td>
+      <td>
+        <a href="javascript:void(0)" @click="onDeleteItem(item)">Удалить</a>
       </td>
     </tr>
   </table>
@@ -24,6 +30,14 @@ export default {
       required: true,
     },
   },
+  methods: {
+    onEditItem(value) {
+      this.$emit("editItem", value);
+    },
+    onDeleteItem(value) {
+      this.$emit("deleteItem", value);
+    },
+  },
 };
 </script>
 
@@ -33,7 +47,7 @@ export default {
 }
 
 #data-list td,
-#customers th {
+#data-list th {
   padding: 8px;
 }
 
@@ -43,6 +57,10 @@ export default {
 
 #data-list tr:hover {
   background-color: #ddd;
+}
+
+#data-list td a {
+  color: black;
 }
 
 #data-list th {

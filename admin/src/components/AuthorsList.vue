@@ -1,7 +1,8 @@
 <template>
   <div class="books-wrapper">
     <h3>Авторы</h3>
-    <data-list :columns="columns" :data="authors"></data-list>
+    <button id="add-book-button" @click="createAuthor">Создать автора</button>
+    <data-list :columns="columns" :data="authors" @editItem="editAuthor" @deleteItem="deleteAuthor"></data-list>
   </div>
 </template>
 
@@ -20,18 +21,39 @@ export default {
       authors: [],
     };
   },
-  methods: {},
-  async beforeMount() {
-    try {
-      const { status, data } = await authorDataService.getAll();
-      if (status == 200) {
-        this.authors = data;
-      } else {
-        alert(status);
+  methods: {
+    async retrieveAuthors() {
+      try {
+        const { status, data } = await authorDataService.getAll();
+        if (status == 200) {
+          this.authors = data;
+        } else {
+          alert(status);
+        }
+      } catch (error) {
+        alert(error.message);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    },
+    async deleteAuthor(value) {
+      try {
+        await authorDataService.delete(value.id);
+        this.refreshAuthors();
+      } catch (error) {
+        alert(error.message);
+      }
+    },
+    refreshAuthors() {
+      this.retrieveAuthors();
+    },
+    createAuthor() {
+      this.$router.push(`/admin/authors/add`);
+    },
+    editAuthor(value) {
+      this.$router.push(`/admin/authors/${value.id}`);
+    },
+  },
+  beforeMount() {
+    this.retrieveAuthors();
   },
 };
 </script>
@@ -39,5 +61,14 @@ export default {
 <style scoped>
 .books-wrapper {
   padding-top: 30px;
+}
+#add-book-button {
+  margin: 0 0 10px 0;
+  float: right;
+  background-color: #343a40 !important;
+  color: #fff;
+  padding: 6px 5px;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

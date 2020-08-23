@@ -52,17 +52,7 @@ $config = [
             'rules' => [
                 [
                     'class' => yii\rest\UrlRule::class,
-                    'controller' => ['v1/books'],
-                    'extraPatterns' => [
-                        'POST' => 'create', // 'xxxxx' refers to 'actionXxxxx'
-                        'POST update/{id}' => 'update',
-                        'PUT {id}' => 'update',
-                        'PATCH {id}' => 'update',
-                        'DELETE {id}' => 'delete',
-                        'GET' => 'list',
-                        'GET {id}' => 'view'
-                    ],
-
+                    'controller' => ['v1/books', 'v1/authors']
                 ]
             ],
         ],

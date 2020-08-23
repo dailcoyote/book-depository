@@ -2,9 +2,9 @@
 
 namespace app\modules\v1\controllers;
 
-use app\modules\v1\models\Author;
 use yii\rest\ActiveController;
-use yii\filters\Cors;
+use app\modules\v1\filters\CorsFilter;
+use app\modules\v1\models\Author;
 
 class AuthorsController extends ActiveController
 {
@@ -14,7 +14,7 @@ class AuthorsController extends ActiveController
     {
         $behaviors = parent::behaviors();
         $behaviors['cors'] = [
-            'class' => Cors::class
+            'class' => CorsFilter::class,
         ];
         return $behaviors;
     }
@@ -41,5 +41,4 @@ class AuthorsController extends ActiveController
         }
         return $list;
     }
-
 }
