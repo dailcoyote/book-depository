@@ -19,7 +19,7 @@ button {
   float: right;
   background-color: #343a40 !important;
   color: #fff;
-  padding: 6px 5px;
+  padding: 6px 12px;
   text-align: center;
   cursor: pointer;
   border-radius: 5px;
