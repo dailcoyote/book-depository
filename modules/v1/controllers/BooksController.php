@@ -19,24 +19,22 @@ class BooksController extends ActiveController
         return $behaviors;
     }
 
-
     public function actions()
     {
         $actions = parent::actions();
-        unset($actions['view']);
         unset($actions['index']);
         return $actions;
     }
 
     public function actionIndex()
     {
-        return Book::find()->with('author')->asArray()->all();
+        return Book::find()->with('author')->orderBy(['title' => SORT_DESC])->asArray()->all();
     }
 
     public function actionList()
     {
         $list = array();
-        $models = Book::find()->with('author')->all();
+        $models = Book::find()->with('author')->orderBy(['title' => SORT_DESC])->all();
         foreach ($models as $book) {
             array_push($list, array(
                 'id' => $book->id,
@@ -46,17 +44,5 @@ class BooksController extends ActiveController
             ));
         }
         return $list;
-    }
-
-    public function actionView($id)
-    {
-        $book = Book::findOne($id);
-        $author = $book->author;
-        return array(
-            'author' => $author->firstname .' '. $author->lastname,
-            'title' => $book->title,
-            'isbn' => $book->isbn,
-            'id' => $book->id
-        );
     }
 }

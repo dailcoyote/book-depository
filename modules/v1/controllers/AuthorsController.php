@@ -29,7 +29,10 @@ class AuthorsController extends ActiveController
     public function actionIndex()
     {
         $list = array();
-        $models = Author::find()->with('books')->all();
+        $models = Author::find()
+            ->orderBy(['firstname' => SORT_ASC, 'lastname' => SORT_ASC])
+            ->with('books')
+            ->all();
         foreach ($models as $author) {
             array_push($list, array(
                 'id' => $author->id,
@@ -45,7 +48,10 @@ class AuthorsController extends ActiveController
     public function actionShortList()
     {
         $list = array();
-        $models = Author::find()->select(['id', 'firstname', 'lastname'])->all();
+        $models = Author::find()
+            ->orderBy(['firstname' => SORT_ASC, 'lastname' => SORT_ASC])
+            ->select(['id', 'firstname', 'lastname'])
+            ->all();
         foreach ($models as $author) {
             array_push($list, array(
                 'id' => $author->id,

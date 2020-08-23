@@ -30,7 +30,12 @@ const routes = [
         path: 'admin/books',
         name: 'books',
         component: () => import("../components/BooksList")
-      }
+      },
+      {
+        path: 'admin/books/add',
+        name: 'add-books',
+        component: () => import("../components/AddBook")
+      },
     ],
   }
 ]
