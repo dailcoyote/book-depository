@@ -22,6 +22,11 @@ const routes = [
         component: () => import("../components/AddAuthor")
       },
       {
+        path: 'admin/authors/:id',
+        name: 'author',
+        component: () => import("../components/Author")
+      },
+      {
         path: 'admin/books',
         name: 'books',
         component: () => import("../components/BooksList")
