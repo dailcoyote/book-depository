@@ -21,18 +21,44 @@ class BooksController extends ActiveController
         ];
         return $verbs;
     }
-    
-    public function actions(){
+
+    public function actions()
+    {
         $actions = parent::actions();
+        unset($actions['view']);
         unset($actions['index']);
         return $actions;
     }
 
-    public function actionIndex(){
+    public function actionIndex()
+    {
         return Book::find()->with('author')->asArray()->all();
     }
 
-    public function actionList(){
-        return Book::find()->with('author')->asArray()->all();
+    public function actionList()
+    {
+        $list = array();
+        $models = Book::find()->with('author')->all();
+        foreach ($models as $book) {
+            array_push($list, array(
+                'author' => $book->author->firstname .' '. $book->author->lastname,
+                'title' => $book->title,
+                'isbn' => $book->isbn,
+                'id' => $book->id
+            ));
+        }
+        return $list;
+    }
+
+    public function actionView($id)
+    {
+        $book = Book::findOne($id);
+        $author = $book->author;
+        return array(
+            'author' => $author->firstname .' '. $author->lastname,
+            'title' => $book->title,
+            'isbn' => $book->isbn,
+            'id' => $book->id
+        );
     }
 }

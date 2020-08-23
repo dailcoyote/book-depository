@@ -21,4 +21,28 @@ class AuthorsController extends ActiveController
         ];
         return $verbs;
     }
+
+    public function actions()
+    {
+        $actions = parent::actions();
+        unset($actions['index']);
+        return $actions;
+    }
+
+    public function actionIndex()
+    {
+        $list = array();
+        $models = Author::find()->with('books')->all();
+        foreach ($models as $author) {
+            array_push($list, array(
+                'firstname' => $author->firstname,
+                'lastname' => $author->lastname,
+                'occupation' => $author->occupation,
+                'books_count' => intval($author->getBooks()->count()),
+                'id' => $author->id
+            ));
+        }
+        return $list;
+    }
+
 }
