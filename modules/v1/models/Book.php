@@ -5,7 +5,7 @@ namespace app\modules\v1\models;
 use Yii;
 
 /**
- * This is the model class for table "books".
+ * This is the model class for table "{{%books}}".
  *
  * @property int $id
  * @property string $title
@@ -21,7 +21,7 @@ class Book extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'books';
+        return '{{%books}}';
     }
 
     /**
@@ -44,20 +44,29 @@ class Book extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => 'Title',
-            'isbn' => 'Isbn',
-            'author_id' => 'Author ID',
+            'id' => Yii::t('app', 'ID'),
+            'title' => Yii::t('app', 'Наименование'),
+            'isbn' => Yii::t('app', 'Номер книжного издания'),
+            'author_id' => Yii::t('app', 'Author ID'),
         ];
     }
 
     /**
      * Gets query for [[Author]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery|\app\modules\v1\models\query\AuthorQuery
      */
     public function getAuthor()
     {
         return $this->hasOne(Author::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * {@inheritdoc}
+     * @return \app\modules\v1\models\query\BookQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new \app\modules\v1\models\query\BookQuery(get_called_class());
     }
 }
