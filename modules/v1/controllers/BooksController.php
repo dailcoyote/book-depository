@@ -2,25 +2,23 @@
 
 namespace app\modules\v1\controllers;
 
-use app\modules\v1\models\Book;
 use yii\rest\ActiveController;
+use app\modules\v1\filters\CorsFilter;
+use app\modules\v1\models\Book;
 
 class BooksController extends ActiveController
 {
     public $modelClass = Book::class;
 
-    // protected function verbs()
-    // {
-    //     $verbs = parent::verbs();
-    //     $verbs =  [
-    //         'index' => ['GET', 'POST', 'HEAD'],
-    //         'view' => ['GET', 'HEAD'],
-    //         'create' => ['POST'],
-    //         'update' => ['PUT', 'POST', 'PATCH'],
-    //         'delete' => ['DELETE'],
-    //     ];
-    //     return $verbs;
-    // }
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['cors'] = [
+            'class' => CorsFilter::class,
+        ];
+        return $behaviors;
+    }
+
 
     public function actions()
     {
