@@ -41,4 +41,17 @@ class AuthorsController extends ActiveController
         }
         return $list;
     }
+
+    public function actionShortList()
+    {
+        $list = array();
+        $models = Author::find()->select(['id', 'firstname', 'lastname'])->all();
+        foreach ($models as $author) {
+            array_push($list, array(
+                'id' => $author->id,
+                'fullname' => $author->firstname . ' ' . $author->lastname
+            ));
+        }
+        return $list;
+    }
 }
