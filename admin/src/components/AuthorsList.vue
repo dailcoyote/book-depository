@@ -1,7 +1,7 @@
 <template>
   <div class="books-wrapper">
     <h3>Авторы</h3>
-    <button id="add-book-button" @click="createAuthor">Создать автора</button>
+    <button @click="createAuthor">Создать автора</button>
     <data-list :columns="columns" :data="authors" @editItem="editAuthor" @deleteItem="deleteAuthor"></data-list>
   </div>
 </template>
@@ -62,7 +62,7 @@ export default {
 .books-wrapper {
   padding-top: 30px;
 }
-#add-book-button {
+.books-wrapper button {
   margin: 0 0 10px 0;
   float: right;
   background-color: #343a40 !important;
