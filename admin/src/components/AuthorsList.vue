@@ -1,19 +1,21 @@
 <template>
   <div class="books-wrapper">
     <h3>Авторы</h3>
-    <button @click="createAuthor">Создать автора</button>
+    <add-new-button @onCreate="createAuthor"></add-new-button>
     <data-list :columns="columns" :data="authors" @editItem="editAuthor" @deleteItem="deleteAuthor"></data-list>
   </div>
 </template>
 
 <script>
+import AddNewButton from "./AddNewButton";
 import DataList from "./DataList";
 import authorDataService from "../services/AuthorDataService";
 
 export default {
   name: "authors-list",
   components: {
-    DataList,
+    AddNewButton,
+    DataList
   },
   data() {
     return {
@@ -70,5 +72,6 @@ export default {
   padding: 6px 5px;
   text-align: center;
   cursor: pointer;
+  border-radius: 5px;
 }
 </style>
