@@ -26,15 +26,23 @@ class BooksController extends ActiveController
         return $actions;
     }
 
-    public function actionIndex()
+    public function actionIndex($author_id = null)
     {
-        return Book::find()->with('author')->orderBy(['title' => SORT_ASC])->asArray()->all();
+        $query = Book::find();
+        if($author_id) {
+            $query = $query->where(['author_id' => $author_id]);
+        }
+        return $query->orderBy(['title' => SORT_ASC])->asArray()->all();
     }
 
-    public function actionList()
+    public function actionList($author_id = null)
     {
         $list = array();
-        $models = Book::find()->with('author')->orderBy(['title' => SORT_ASC])->all();
+        $query = Book::find();
+        if($author_id) {
+            $query = $query->where(['author_id' => $author_id]);
+        }
+        $models = $query->with('author')->orderBy(['title' => SORT_ASC])->all();
         foreach ($models as $book) {
             array_push($list, array(
                 'id' => $book->id,
