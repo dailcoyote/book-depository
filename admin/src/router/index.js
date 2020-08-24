@@ -8,36 +8,41 @@ const routes = [
   {
     path: '/',
     name: 'Default',
-    redirect: '/admin/authors',
+    redirect: '/admin'
+  }, 
+  {
+    path: '/admin',
+    name: 'admin',
     component: DefaultLayout,
+    redirect: 'admin/authors',
     children: [
       {
-        path: 'admin/authors',
+        path: 'authors',
         name: 'authors',
         component: () => import("../components/AuthorsList")
       },
       {
-        path: 'admin/authors/add',
+        path: 'authors/add',
         name: 'add-author',
         component: () => import("../components/AddAuthor")
       },
       {
-        path: 'admin/authors/:id',
+        path: 'authors/:id',
         name: 'author',
         component: () => import("../components/Author")
       },
       {
-        path: 'admin/books',
+        path: 'books',
         name: 'books',
         component: () => import("../components/BooksList")
       },
       {
-        path: 'admin/books/add',
+        path: 'books/add',
         name: 'add-books',
         component: () => import("../components/AddBook")
       },
       {
-        path: 'admin/books/:id',
+        path: 'books/:id',
         name: 'book',
         component: () => import("../components/Book")
       },
