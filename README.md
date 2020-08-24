@@ -29,10 +29,10 @@ rapidly creating small projects.
 Требования
 ------------
 
-PHP minimum 5.6.0. Yii framework (~2.0.14)
-MySQL (MariaDB)
-Apache
-node.js (>=14.5.0). Vue ~4.5.0
+- PHP minimum 5.6.0. Yii framework (~2.0.14)
+- MySQL (MariaDB)
+- Apache
+- node.js (>=14.5.0). Vue ~4.5.0
 
 
 Установка
