@@ -54,9 +54,6 @@ composer install
 
 1. Создайте базу `book_depository` в системе MySQL и затем проведите миграцию.
 
-   ```
-   tests/bin/yii migrate
-   ```
 2. Отредактируйте файл `config/db.php` в проекте исходя из ваших настроек MySQL:
 
     ```php
@@ -68,6 +65,7 @@ composer install
         'charset' => 'utf8',
     ];
     ```
+    
 3. Миграция базы:
 
     ```
