@@ -36,6 +36,11 @@ const routes = [
         name: 'add-books',
         component: () => import("../components/AddBook")
       },
+      {
+        path: 'admin/books/:id',
+        name: 'book',
+        component: () => import("../components/Book")
+      },
     ],
   }
 ]
